@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WELCOME TO JINHOS WORLD</title>
   <style>
-    
+    /* 1. 기본 스타일 (수정 없음) */
     :root {
       --bg-darkest: #121212;
       --bg-dark: #1E1E1E;
@@ -13,6 +13,7 @@
       --text-primary: #E5E7EB;
       --text-secondary: #9CA3AF;
       --border-color: #333333;
+      --accent-color: #00E676; /* 강조 색상 (녹색) */
     }
 
     * {
@@ -32,7 +33,7 @@
       padding: 40px 20px;
     }
 
-    /* 2. 포트폴리오 카드 (전체 컨테이너) */
+    /* 2. 포트폴리오 카드 (수정 없음) */
     .portfolio-container {
       display: flex;
       max-width: 1200px;
@@ -48,7 +49,7 @@
     .sidebar {
       flex-basis: 35%;
       flex-shrink: 0;
-      background: #181818; /* 이미지와 유사하게 살짝 더 어둡게 */
+      background: #181818;
       padding: 40px;
       text-align: center;
       display: flex;
@@ -62,7 +63,14 @@
       border-radius: 50%;
       border: 4px solid var(--border-color);
       margin: 0 auto 20px auto;
-      object-fit: cover; /* 이미지 비율 유지하며 채우기 */
+      object-fit: cover;
+      /* ✨ 개선: 부드러운 전환 효과 추가 */
+      transition: transform 0.3s ease;
+    }
+    
+    /* ✨ 개선: 프로필 사진 호버 효과 */
+    .profile-pic:hover {
+      transform: scale(1.05);
     }
 
     .sidebar h1 {
@@ -102,14 +110,31 @@
       border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 500;
+      /* ✨ 개선: 부드러운 전환 효과 추가 */
+      transition: all 0.2s ease-in-out;
+    }
+    
+    /* ✨ 개선: 태그 호버 효과 */
+    .tag:hover {
+      transform: translateY(-2px);
+      background-color: #3a3a3a;
+      color: var(--text-primary);
     }
 
-    /* 사이드바 하단 연락처 */
+    /* ✨ 개선: 사이드바 하단 연락처 (a 태그로 변경) */
     .sidebar-footer {
       margin-top: auto; /* 하단으로 밀착 */
       font-size: 0.9rem;
+      line-height: 1.8; /* 간격 살짝 넓힘 */
+    }
+    .sidebar-footer a {
       color: var(--text-secondary);
-      line-height: 1.6;
+      text-decoration: none;
+      display: block; /* 줄바꿈 */
+      transition: color 0.2s ease;
+    }
+    .sidebar-footer a:hover {
+      color: var(--text-primary); /* 호버 시 색상 밝게 */
     }
 
     /* 4. 오른쪽 패널: 메인 컨텐츠 */
@@ -117,9 +142,25 @@
       flex-basis: 65%;
       padding: 40px;
       overflow-y: auto;
-      /* 화면이 줄어들어도 최소 높이를 가지도록 */
-      max-height: 85vh; 
+      max-height: 85vh;
     }
+    
+    /* ✨ 개선: 다크 모드 전용 스크롤바 */
+    .main-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    .main-content::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    .main-content::-webkit-scrollbar-thumb {
+      background-color: var(--bg-card);
+      border-radius: 4px;
+      border: 2px solid var(--bg-dark);
+    }
+    .main-content::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+
 
     .content-section {
       margin-bottom: 40px;
@@ -130,16 +171,20 @@
       margin-bottom: 25px;
       border-bottom: 2px solid var(--border-color);
       padding-bottom: 10px;
+      /* ✨ 개선: 아이콘 배치를 위한 flex */
+      display: flex;
+      align-items: center;
+      gap: 10px; /* 아이콘과 텍스트 사이 간격 */
     }
 
-    /* About Me (요약 소개) */
+    /* About Me (수정 없음) */
     #about p {
       font-size: 1.1rem;
       line-height: 1.7;
       color: var(--text-secondary);
     }
 
-    /* Profile (상세 역량) */
+    /* Profile (상세 역량) (수정 없음) */
     #profile-details h3 {
       font-size: 1.3rem;
       color: var(--text-primary);
@@ -148,25 +193,25 @@
     }
 
     #profile-details ul {
-      list-style: none; /* 기본 불릿 제거 */
+      list-style: none;
       padding-left: 0;
     }
 
     #profile-details li {
       position: relative;
-      padding-left: 25px; /* 아이콘을 위한 공간 */
+      padding-left: 25px;
       margin-bottom: 12px;
       line-height: 1.6;
       color: #B0B0B0;
     }
 
-    /* 커스텀 불릿 (아이콘) */
+    /* 커스텀 불릿 (수정 없음) */
     #profile-details li::before {
-      content: '✓'; /* 체크 마크 */
+      content: '✓';
       position: absolute;
       left: 0;
       top: 2px;
-      color: #00E676; /* 밝은 녹색 */
+      color: var(--accent-color);
       font-weight: bold;
     }
 
@@ -180,10 +225,15 @@
       padding-left: 30px;
       padding-bottom: 30px;
       border-left: 2px solid var(--border-color);
+      /* ✨ 개선: 부드러운 전환 효과 (호버 대비) */
+      transition: background-color 0.3s ease;
+      border-radius: 8px; /* 호버시 배경색을 위해 추가 */
+      padding-top: 5px; /* 호버시 배경색을 위해 추가 */
+      padding-right: 10px; /* 호버시 배경색을 위해 추가 */
     }
     
     .timeline-item:last-child {
-      border-left: 2px solid transparent; /* 마지막 항목 선 제거 */
+      border-left: 2px solid transparent;
       padding-bottom: 0;
     }
 
@@ -191,13 +241,24 @@
     .timeline-item::before {
       content: '';
       position: absolute;
-      left: -10px; /* 선의 중앙 */
-      top: 0;
+      left: -10px;
+      top: 10px; /* 위치 조정 */
       width: 18px;
       height: 18px;
       background: var(--text-primary);
       border-radius: 50%;
       border: 3px solid var(--bg-dark);
+      /* ✨ 개선: 부드러운 전환 효과 추가 */
+      transition: all 0.3s ease;
+    }
+    
+    /* ✨ 개선: 타임라인 호버 효과 */
+    .timeline-item:hover {
+      background-color: var(--bg-darkest); /* 살짝 어두운 배경 */
+    }
+    .timeline-item:hover::before {
+      background: var(--accent-color); /* 녹색 점 */
+      box-shadow: 0 0 10px var(--accent-color); /* 녹색 그림자 */
     }
 
     .timeline-date {
@@ -219,13 +280,13 @@
       margin: 5px 0 0;
     }
     
-    /* 5. 모바일 반응형 */
+    /* 5. 모바일 반응형 (수정 없음) */
     @media (max-width: 900px) {
       body {
         padding: 0;
       }
       .portfolio-container {
-        flex-direction: column; /* 세로로 쌓기 */
+        flex-direction: column;
         border-radius: 0;
         width: 100%;
         min-height: 100vh;
@@ -237,10 +298,9 @@
       }
       .main-content {
         flex-basis: auto;
-        max-height: none; /* 모바일에서 스크롤 제한 해제 */
+        max-height: none;
       }
     }
-
   </style>
 </head>
 <body>
@@ -256,7 +316,7 @@
 
       <section class="sidebar-section">
         <h2>🚀 Core Skills</h2>
-        <div class="tags-container"  >
+        <div class="tags-container">
           <span class="tag">Python (Pandas, Scikit)</span>
           <span class="tag">SQL</span>
           <span class="tag">Data Analysis</span>
@@ -274,9 +334,9 @@
       </section>
 
       <footer class="sidebar-footer">
-        <p>jinho8293@gmail.com</p>
-        <p>+82 010-9941-8293</p>
-        <p>github.com/jinho8293</p>
+        <a href="mailto:jinho8293@gmail.com">jinho8293@gmail.com</a>
+        <a href="tel:+8201099418293">+82 010-9941-8293</a>
+        <a href="https://github.com/jinho8293" target="_blank" rel="noopener noreferrer">github.com/jinho8293</a>
       </footer>
     </aside>
 
@@ -286,24 +346,24 @@
         <h2>👋 About Me</h2>
         <p>
           산업공학 전공을 기반으로 데이터 분석과 최적화에 대한 체계적인 이해를 보유했습니다. 유통 및 AI(MS, Google) 관련 실무 경험을 통해 기술적 이해와 비즈니스 감각을 겸비한 데이터 기반 의사결정형 인재로 성장하고 있습니다.
-        </p>
+        </T>
       </section>
 
       <section class="content-section" id="experience">
         <h2>💼 Experience</h2>
         <div class="timeline">
           <div class="timeline-item">
-            <p class="timeline-date">2023 - Present </p>
-            <h3 class="timeline-title"> Kongju Natonal University</h3>
+            <p class="timeline-date">2023 - Present</p>
+            <h3 class="timeline-title">Kongju Natonal University</h3>
             <p class="timeline-company">Industy Engineering</p>
           </div>
           <div class="timeline-item">
-            <p class="timeline-date">2024.04 - 2025.07 </p>
+            <p class="timeline-date">2024.04 - 2025.07</p>
             <h3 class="timeline-title">Pricing</h3>
             <p class="timeline-company">Coupang</p>
           </div>
           <div class="timeline-item">
-            <p class="timeline-date">2023.11 - 2024.02 </p>
+            <p class="timeline-date">2023.11 - 2024.02</p>
             <h3 class="timeline-title">Intern</h3>
             <p class="timeline-company">Shinsegae</p>
           </div>
